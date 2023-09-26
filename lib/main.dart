@@ -1,4 +1,3 @@
-// import 'package:el_tooltip/el_tooltip.dart';
 import 'package:flutter/material.dart';
 
 import 'el_tooltip.dart';
@@ -46,14 +45,14 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.red,
           body: ListView.builder(
             itemBuilder: (context, int) {
-              return buildInfo();
+              return buildInfo(context);
             },
             itemCount: 20,
           )),
     );
   }
 
-  buildInfo() {
+  buildInfo(context) {
     return Column(
       children: [
         Padding(
@@ -61,22 +60,22 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildElToolTip(longTailPosition: "Left"),
-              buildElToolTip(),
-              buildElToolTip(
+              buildElToolTip(context,longTailPosition: "Left"),
+              buildElToolTip(context),
+              buildElToolTip(context,
                   position: ElTooltipPosition.bottomEnd,
                   longTailPosition: 'Right'),
 
             ],
           ),
         ),
-        const SizedBox(height: 70),
+        const SizedBox(height: 300),
       ],
     );
   }
 
 
-  buildElToolTip({position, longTailPosition}) {
+  buildElToolTip(context,{position, longTailPosition}) {
     return ElTooltip(
       distance: 40,
       // showModal: false,
@@ -98,7 +97,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Align(
                 alignment: Alignment.bottomRight,
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                     // Navigator.pop(context);
+                    },
                     child: const Text('Got it',
                         style: TextStyle(
                             fontSize: 20,

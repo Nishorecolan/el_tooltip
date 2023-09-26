@@ -136,21 +136,22 @@ class ElTooltipOverlayState extends State<ElTooltipOverlay> {
             Positioned(
               // top: widget.toolTipElementsDisplay.arrow.y,
               // left: widget.toolTipElementsDisplay.arrow.x,
-              top: widget.longTailPosition == 'Left'
+              top: widget.toolTipElementsDisplay.position == ElTooltipPosition.topStart ||
+                  widget.toolTipElementsDisplay.position == ElTooltipPosition.topEnd
+                  ? widget.toolTipElementsDisplay.arrow.y
+                  : widget.longTailPosition == 'Left' || widget.longTailPosition == 'Right'
                   ? widget.toolTipElementsDisplay.arrow.y - 20
-                  : widget.longTailPosition == 'Right'
-                      ? widget.toolTipElementsDisplay.arrow.y - 20
-                      : widget.toolTipElementsDisplay.position == ElTooltipPosition.topCenter
-                          ? widget.toolTipElementsDisplay.arrow.y
-                          : widget.toolTipElementsDisplay.arrow.y - 30,
+                  : widget.toolTipElementsDisplay.position == ElTooltipPosition.topCenter
+                  ? widget.toolTipElementsDisplay.arrow.y
+                  : widget.toolTipElementsDisplay.arrow.y - 20,
               left: widget.longTailPosition == 'Right'
-                  ? widget.toolTipElementsDisplay.arrow.x - 34
-                  : widget.toolTipElementsDisplay.arrow.x,
+                  ? widget.toolTipElementsDisplay.arrow.x - 19
+                  : widget.longTailPosition == 'Center' ? widget.toolTipElementsDisplay.arrow.x - 10 : widget.toolTipElementsDisplay.arrow.x,
               child: Arrow(
                 color: widget.color,
                 position: widget.toolTipElementsDisplay.position,
-                width: widget.longTailPosition == 'Center' ? 20 : widget.longTailPosition == 'Left' ? 50 : 50,
-                height: 40,
+                width: widget.longTailPosition == 'Center' ? 35 : widget.longTailPosition == 'Left' ? 35 : 35,
+                height: 30,
                 // width: widget.arrowBox.w,
                 // height: widget.arrowBox.h,
               ),
