@@ -23,7 +23,7 @@ export 'src/modal_configuration.dart';
 /// Widget that displays a tooltip
 /// It takes a widget as the trigger and a widget as the content
 class ElTooltip extends StatefulWidget {
-  const ElTooltip({
+   ElTooltip({
     required this.content,
     required this.child,
     this.color = Colors.white,
@@ -94,9 +94,10 @@ class ElTooltip extends StatefulWidget {
   final ElTooltipController? controller;
 
   final longTailPosition;
+  _ElTooltipState? elToolTipState;
 
   @override
-  State<ElTooltip> createState() => _ElTooltipState();
+  State<ElTooltip> createState() => elToolTipState=_ElTooltipState();
 }
 
 /// _ElTooltipState extends ElTooltip class
@@ -114,7 +115,7 @@ class _ElTooltipState extends State<ElTooltip> with WidgetsBindingObserver {
   /// or when the user scrolls. This is done to avoid displacement.
   @override
   void didChangeMetrics() {
-    _hideOverlay();
+    hideOverlay();
   }
 
   /// Dispose the observer
@@ -131,7 +132,7 @@ class _ElTooltipState extends State<ElTooltip> with WidgetsBindingObserver {
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _loadHiddenOverlay(context));
     WidgetsBinding.instance.addObserver(this);
-    widget.controller?.attach(show: _showOverlay, hide: _hideOverlay);
+    widget.controller?.attach(show: _showOverlay, hide: hideOverlay);
   }
 
   ElementBox get _screenSize => _getScreenSize();
@@ -190,7 +191,7 @@ class _ElTooltipState extends State<ElTooltip> with WidgetsBindingObserver {
         y: offset.dy,
       );
     }
-    _hideOverlay();
+    hideOverlay();
     return ElementBox(w: 0, h: 0, x: 0, y: 0);
   }
 
@@ -204,7 +205,7 @@ class _ElTooltipState extends State<ElTooltip> with WidgetsBindingObserver {
 
   /// Hides or shows the tooltip
   void _toggleOverlay(BuildContext context) =>
-      _overlayEntry != null ? _hideOverlay() : _showOverlay(context);
+      _overlayEntry != null ? hideOverlay() : _showOverlay(context);
 
   /// Loads the tooltip into view
   Future<void> _showOverlay([BuildContext? context]) async {
@@ -230,7 +231,7 @@ class _ElTooltipState extends State<ElTooltip> with WidgetsBindingObserver {
         toolTipElementsDisplay: toolTipElementsDisplay,
         color: widget.color,
         content: widget.content,
-        hideOverlay: _hideOverlay,
+        hideOverlay: hideOverlay,
         triggerBox: _triggerBox,
         arrowBox: _arrowBox,
         modalConfiguration: widget.modalConfiguration,
@@ -252,12 +253,12 @@ class _ElTooltipState extends State<ElTooltip> with WidgetsBindingObserver {
 
     // Add timeout for the tooltip to disapear after a few seconds
     if (widget.timeout > Duration.zero) {
-      await Future.delayed(widget.timeout).whenComplete(_hideOverlay);
+      await Future.delayed(widget.timeout).whenComplete(hideOverlay);
     }
   }
 
   /// Method to hide the tooltip
-  Future<void> _hideOverlay() async {
+  Future<void> hideOverlay() async {
     final state = _overlayKey?.currentState;
     if (state != null) {
       await state.hide();

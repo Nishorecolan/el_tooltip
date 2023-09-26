@@ -76,7 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
   buildElToolTip(context,{position, longTailPosition}) {
-    return ElTooltip(
+    ElTooltip? eltoolTipVar;
+    return eltoolTipVar =  ElTooltip(
       distance: 40,
       // showModal: false,
       longTailPosition: longTailPosition ?? 'Center',
@@ -99,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: TextButton(
                     onPressed: () {
                      // Navigator.pop(context);
+                      eltoolTipVar!.elToolTipState?.hideOverlay();
                     },
                     child: const Text('Got it',
                         style: TextStyle(
