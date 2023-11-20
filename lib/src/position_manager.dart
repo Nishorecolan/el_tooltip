@@ -46,7 +46,8 @@ class PositionManager {
       bubble: ElementBox(
         w: overlayBox.w,
         h: overlayBox.h,
-        x: triggerBox.x + _half(triggerBox.w),
+        x: triggerBox.x + _half(triggerBox.w) + 2, ///changes
+        // x: triggerBox.x + _half(triggerBox.w),
         y: triggerBox.y - overlayBox.h - distance - arrowBox.h,
       ),
       position: ElTooltipPosition.topStart,
@@ -71,7 +72,7 @@ class PositionManager {
       bubble: ElementBox(
         w: overlayBox.w,
         h: overlayBox.h,
-        x: triggerBox.x + _half(triggerBox.w) - _half(overlayBox.w),
+       // x: triggerBox.x + _half(triggerBox.w) - _half(overlayBox.w), ///changes remove
         y: triggerBox.y - overlayBox.h - distance - arrowBox.h,
       ),
       position: ElTooltipPosition.topCenter,
@@ -90,7 +91,8 @@ class PositionManager {
       bubble: ElementBox(
         w: arrowBox.w,
         h: arrowBox.h,
-        x: triggerBox.x - overlayBox.w + _half(triggerBox.w),
+        x: triggerBox.x - overlayBox.w + _half(triggerBox.w) - 1, /// changes
+        // x: triggerBox.x - overlayBox.w + _half(triggerBox.w),
         y: triggerBox.y - overlayBox.h - distance - arrowBox.h,
       ),
       position: ElTooltipPosition.topEnd,
@@ -114,7 +116,8 @@ class PositionManager {
       bubble: ElementBox(
         w: overlayBox.w,
         h: overlayBox.h,
-        x: triggerBox.x + _half(triggerBox.w),
+        x: triggerBox.x + _half(triggerBox.w) + 2.5, ///changes
+        // x: triggerBox.x + _half(triggerBox.w),
         y: triggerBox.y + triggerBox.h + distance + arrowBox.h,
       ),
       position: ElTooltipPosition.bottomStart,
@@ -334,9 +337,9 @@ class PositionManager {
       //_rightCenter,
       _topStart,
       _topEnd,
-      _leftStart,
-      _rightStart,
-      _leftEnd,
+      //_leftStart, ///changes remove
+      //_rightStart, ///changes remove
+      //_leftEnd, /// changes remove
       _rightEnd,
       _bottomStart,
       _bottomEnd,

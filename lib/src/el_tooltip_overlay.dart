@@ -124,12 +124,25 @@ class ElTooltipOverlayState extends State<ElTooltipOverlay> {
           Positioned(
             top: widget.toolTipElementsDisplay.bubble.y,
             left: widget.toolTipElementsDisplay.bubble.x,
-            child: Bubble(
-              triggerBox: widget.triggerBox,
-              padding: widget.padding,
-              radius: widget.toolTipElementsDisplay.radius,
-              color: widget.color,
-              child: widget.content,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.shade400,
+                    blurRadius: 3,
+                   spreadRadius: 5,
+                   offset: Offset(0, 5), // Shadow position
+                  ),
+                ],
+              ),
+              child: Bubble(
+                triggerBox: widget.triggerBox,
+                padding: widget.padding,
+                radius: widget.toolTipElementsDisplay.radius,
+                color: widget.color,
+                child: widget.content,
+              ),
             ),
           ),
           if (widget.showArrow)
@@ -137,16 +150,15 @@ class ElTooltipOverlayState extends State<ElTooltipOverlay> {
               // top: widget.toolTipElementsDisplay.arrow.y,
               // left: widget.toolTipElementsDisplay.arrow.x,
               top: widget.toolTipElementsDisplay.position == ElTooltipPosition.topStart ||
-                  widget.toolTipElementsDisplay.position == ElTooltipPosition.topEnd
-                  ? widget.toolTipElementsDisplay.arrow.y
-                  : widget.longTailPosition == 'Left' || widget.longTailPosition == 'Right'
-                  ? widget.toolTipElementsDisplay.arrow.y - 20
-                  : widget.toolTipElementsDisplay.position == ElTooltipPosition.topCenter
+                      widget.toolTipElementsDisplay.position == ElTooltipPosition.topEnd ||
+                      widget.toolTipElementsDisplay.position == ElTooltipPosition.topCenter
                   ? widget.toolTipElementsDisplay.arrow.y
                   : widget.toolTipElementsDisplay.arrow.y - 20,
               left: widget.longTailPosition == 'Right'
                   ? widget.toolTipElementsDisplay.arrow.x - 19
-                  : widget.longTailPosition == 'Center' ? widget.toolTipElementsDisplay.arrow.x - 10 : widget.toolTipElementsDisplay.arrow.x,
+                  : widget.longTailPosition == 'Center' ? widget.toolTipElementsDisplay.arrow.x - 10
+                  // : widget.toolTipElementsDisplay.arrow.x ,
+                  : widget.toolTipElementsDisplay.arrow.x + 2, ///changes
               child: Arrow(
                 color: widget.color,
                 position: widget.toolTipElementsDisplay.position,

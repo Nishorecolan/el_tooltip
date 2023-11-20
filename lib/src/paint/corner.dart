@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 /// Design of the corner triangle that appears attached to the tooltip
@@ -22,6 +25,27 @@ class Corner extends CustomPainter {
     path.cubicTo(0, 0, 0, size.height * 0.69, 0, size.height * 0.69);
     path.cubicTo(
         0, size.height * 0.69, 0, size.height * 0.69, 0, size.height * 0.69);
+
+    // // Create a shadow path by offsetting the original path slightly
+    // Path shadowPath = path.shift(Offset(0, 3.5));
+    Path shadowPath = path.shift(Offset(-0.5, 2));
+
+    // // Draw the shadow path
+    // paint.color = Colors.grey.withOpacity(0.4); // Shadow color with opacity
+    paint.color = Colors.grey.shade400; // Shadow color with opacity
+    canvas.drawPath(shadowPath, paint);
+
+    // Add a shadow effect using the drawShadow method
+    canvas.drawShadow(
+      path,
+      Colors.transparent, // Shadow color
+      0.0, // Blur radius
+      true, // Should include shape in shadow
+    );
+
+    // Draw the original triangular shape
+    paint.color = color;
+
     canvas.drawPath(path, paint);
   }
 
